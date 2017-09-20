@@ -7,7 +7,6 @@ set_time_limit(300);
 
 class Https
 {
-    private $_curl = null;
     private static $_https = null;
 
     public static $curlopt_timeout = 100; // 设置curl超时时间
@@ -162,8 +161,7 @@ class Https
     private function get($url, $headers, $sendData)
     {
         $url = $this->urlAdddata($url, $sendData);
-        $this->_curl = $this->curl($url, $headers);
-        $curl = $this->_curl;
+        $curl = $this->curl($url, $headers);
         $tmpInfo = curl_exec($curl); // 执行操作  
         curl_close($this->_curl); // 关闭CURL会话  
         return $tmpInfo; // 返回数据  
@@ -174,8 +172,7 @@ class Https
      */
     private function post($url, $headers, $sendData)
     {
-        $this->_curl = $this->curl($url, $headers);
-        $curl = $this->_curl;
+        $curl = $this->curl($url, $headers);
         curl_setopt($curl, CURLOPT_POST, 1); // 发送一个常规的Post请求  
         if (is_array($sendData) && $sendData) {
             $sendData = $this->dataToString($sendData);
@@ -191,8 +188,7 @@ class Https
      */
     private function put($url, $headers, $sendData)
     {
-        $this->_curl = $this->curl($url, $headers);
-        $curl = $this->_curl;
+        $curl = $this->curl($url, $headers);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
         if (is_array($sendData) && $sendData) {
             $sendData = $this->dataToString($sendData);
@@ -208,8 +204,7 @@ class Https
      */
     private function delete($url, $headers, $sendData)
     {
-        $this->_curl = $this->curl($url, $headers);
-        $curl = $this->_curl;
+        $curl = $this->curl($url, $headers);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
         if (is_array($sendData) && $sendData) {
             $sendData = $this->dataToString($sendData);
